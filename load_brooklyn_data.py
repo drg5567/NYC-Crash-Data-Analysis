@@ -13,8 +13,8 @@ cur = conn.cursor()
 
 print("Reading Data From CSV")
 crash_data = pd.read_csv("C:\\Users\\Public\\Documents\\nyc_data\\Motor_Vehicle_Collisions_-_Crashes_20240416.csv")
+print("Cleaning Data")
 crash_data = crash_data.replace({np.nan: None})
-crash_data["CRASH DATE"] = crash_data["CRASH DATE"].apply(reformat_date)
 
 insert_stmt = "INSERT INTO crash_data(collision_id,\
     crash_date,\
@@ -53,9 +53,10 @@ for i in range(len(crash_data)):
     if row["BOROUGH"] == "BROOKLYN":
         if record_count % 500 == 0:
             print("Inserting Record " + str(record_count))
+        crash_date = reformat_date(row["CRASH DATE"])
         cur.execute(insert_stmt,
                     [row["COLLISION_ID"],
-                     row["CRASH DATE"],
+                     crash_date,
                      row["CRASH TIME"],
                      row["ZIP CODE"],
                      row["LATITUDE"],
