@@ -38,3 +38,6 @@ make_heatmap(2019)
 
 print("Building Heatmap of Brooklyn Traffic in 2023")
 make_heatmap(2023)
+
+cur.close()
+conn.close()

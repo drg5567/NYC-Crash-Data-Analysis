@@ -84,5 +84,7 @@ for i in range(len(crash_data)):
                      row["VEHICLE TYPE CODE 4"],
                      row["VEHICLE TYPE CODE 5"]])
         record_count += 1
+
 conn.commit()
 cur.close()
+conn.close()
