@@ -53,7 +53,7 @@ def clean_dataset(dataframe):
 
     week_count = 0
     for x in range(0, len(dataframe), 7):
-        rows_left = len(dataframe) - 7 - x
+        rows_left = len(dataframe) - x
         if rows_left >= 7:
             num_events = dataframe.iloc[x:x + 7, 1:2].sum().iloc[0]
         else:
