@@ -91,14 +91,14 @@ print("Generating Parzen Density Estimation")
 parzen_graph(cleaned_crash_df)
 
 print("Finding Window:")
-rolling_sum = crash_df['NumberOfEvents'].rolling(window=60, min_periods=1).sum()
+rolling_sum = crash_df['NumberOfEvents'].rolling(window=60).sum()
 max_period_start_index = rolling_sum.idxmax()
 
 # Extract the 60-day period with the most accidents
-most_accidents_period = crash_df.iloc[max_period_start_index:max_period_start_index + 60]
+most_accidents_period = crash_df.iloc[max_period_start_index - 59:max_period_start_index + 1]
 print("60-day period with the most accidents:")
 print(most_accidents_period)
 
-max_week_start = max_period_start_index // 7
-max_week_end = (max_period_start_index + 59) // 7
+max_week_start = (max_period_start_index - 59) // 7
+max_week_end = max_period_start_index // 7
 print("\nThe most accidents occurred between weeks " + str(max_week_start) + " and " + str(max_week_end))
