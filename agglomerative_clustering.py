@@ -71,7 +71,7 @@ def gen_dendrogram(dataframe, year_str):
     :return: None
     """
     linked = linkage(dataframe)
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(12, 5))
     dendrogram(linked, orientation='top', truncate_mode='lastp', p=20, distance_sort='descending',
                show_leaf_counts=True)
     plt.title('Brooklyn Crashes from ' + year_str + ' Dendrogram')
@@ -100,7 +100,8 @@ def agglo_functions(year_str):
     cc_matrix = gen_cross_corr_matrix(crash_df)
     cc_matrix.to_csv("brooklyn_cc_matrix_" + year_str + ".csv")
 
-    unimportant_cols = ["crash_date", "crash_time", "latitude", "longitude", "vehicle_type_code_1"]
+    unimportant_cols = ["collision_id", "crash_date", "crash_time", "zip_code", "latitude", "longitude", "location",
+                        "vehicle_type_code_1"]
 
     print("Dropping Unimportant Columns:")
     crash_df = crash_df.drop(unimportant_cols, axis=1)
