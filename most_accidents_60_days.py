@@ -82,7 +82,7 @@ crash_df = pd.DataFrame(results, columns=columns)
 cleaned_crash_df = clean_dataset(crash_df.copy())
 
 print("Generating Histogram")
-hist = cleaned_crash_df.plot.bar(x="Week", y="NumberOfEvents", figsize=(20, 5),
+hist = cleaned_crash_df.plot.bar(x="Week", y="NumberOfEvents", figsize=(22, 5),
                                  title="Number of Crashes in Brooklyn from Jan 2020 to Oct 2022", ylabel="Count")
 plt.savefig("brooklyn_crash_histogram.png")
 
