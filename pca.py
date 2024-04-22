@@ -116,6 +116,8 @@ def project_data(data, eigenvects, filename, month, year):
     :param data: the dataset
     :param eigenvects: the important eigenvectors
     :param filename: the filename to save the plot as
+    :param month: the given month of the data
+    :param year: the given year of the data
     :return: the projected data
     """
     projected_data = np.dot(data, eigenvects.T)
