@@ -4,15 +4,32 @@ from sklearn.cluster import AgglomerativeClustering
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, linkage
 
+"""
+This program performs agglomerative clustering on Brooklyn traffic data for accidents that occurred
+during 2019 and 2023 respectively
+
+@author: Danny Gardner      drg5567
+"""
+
 conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
 cur = conn.cursor()
 
 
 def format_date(date):
+    """
+    Formats a datetime to a string
+    :param date: the datetime
+    :return: the formatted date
+    """
     return date.strftime('%Y-%m-%d')
 
 
 def gen_dataframe(year_str):
+    """
+    Select data from the database and construct the dataframe for future calculations
+    :param year_str: the year of data to be extracted
+    :return: the dataframe
+    """
     sql_stmt = ("SELECT * FROM crash_data "
                 "WHERE crash_date BETWEEN '" + year_str + "-01-01' AND '" + year_str + "-12-31' ")
     cur.execute(sql_stmt)
@@ -21,6 +38,7 @@ def gen_dataframe(year_str):
 
     df = pd.DataFrame(results, columns=columns)
 
+    # Clean the numeric data columns
     df["zip_code"] = df["zip_code"].fillna(0)
     df["latitude"] = df["latitude"].fillna(0)
     df["longitude"] = df["longitude"].fillna(0)
@@ -28,6 +46,7 @@ def gen_dataframe(year_str):
     df["latitude"] = df["latitude"].round(3)
     df["longitude"] = df["longitude"].round(3)
 
+    # format the date and time columns
     df["crash_date"] = df["crash_date"].apply(format_date)
     df["crash_time"] = df["crash_time"].astype(str).str[7:]
 
@@ -36,6 +55,7 @@ def gen_dataframe(year_str):
                    "contributing_factor_vehicle_4", "contributing_factor_vehicle_5", "vehicle_type_code_1",
                    "vehicle_type_code_2", "vehicle_type_code_3", "vehicle_type_code_4", "vehicle_type_code_5"]
 
+    # Encode the string columns as integers
     for col in string_cols:
         df[col] = df[col].astype('category').cat.codes
 
@@ -55,6 +75,11 @@ def gen_cross_corr_matrix(dataframe):
 
 
 def agglomerative_clustering(dataframe):
+    """
+    Calls agglomerative clustering on the dataframe using the sklearn library
+    :param dataframe: the dataframe to use
+    :return: The clustered data
+    """
     cluster = AgglomerativeClustering(n_clusters=5, metric="euclidean", linkage='single')
     clusters = cluster.fit_predict(dataframe)
 
@@ -82,6 +107,11 @@ def gen_dendrogram(dataframe, year_str):
 
 
 def find_none_vals(crash_df):
+    """
+    Finds columns that have null values
+    :param crash_df: the given dataframe
+    :return: a list of columns with null values
+    """
     none_cols = []
     for col in crash_df.columns:
         if crash_df[col].isna().any():
@@ -90,6 +120,11 @@ def find_none_vals(crash_df):
 
 
 def agglo_functions(year_str):
+    """
+    The main function to perform all functions for agglomerative clustering
+    :param year_str: the year to perform the functions on
+    :return: None
+    """
     print("Performing Agglomerative Clustering on Data from " + year_str)
     crash_df = gen_dataframe(year_str)
 
@@ -119,3 +154,6 @@ def agglo_functions(year_str):
 ########################################################################
 agglo_functions("2019")
 agglo_functions("2023")
+
+cur.close()
+conn.close()

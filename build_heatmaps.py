@@ -3,11 +3,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+"""
+This script builds a heatmap of traffic data that occurs during 2019 and 2023 based on latitude and longitude
+
+@author: Danny Gardner      drg5567
+"""
+
 conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
 cur = conn.cursor()
 
 
 def make_heatmap(year):
+    """
+    Generates a heatmap based on Brooklyn traffic data from a given year
+    :param year: the year to gather data for
+    :return: None
+    """
+    # Get the data to be used
     year_str = str(year)
     sql_stmt = ("SELECT ROUND(latitude, 3) AS lat, ROUND(longitude, 3) AS longit, COUNT(*) AS Num_Crashes "
                 "FROM crash_data "

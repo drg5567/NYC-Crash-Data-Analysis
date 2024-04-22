@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import datetime
 
+"""
+Loads the initial data for the database from a CSV file downloaded from the NYC traffic authority
+
+@author: Danny Gardner      drg5567
+"""
+
 
 def reformat_date(date_str):
     return datetime.datetime.strptime(date_str, '%m/%d/%Y').strftime('%Y-%m-%d')

@@ -2,6 +2,13 @@ import pymysql
 import pandas as pd
 import matplotlib.pyplot as plt
 
+"""
+Determine the 60 consecutive days that had the most accidents in Brooklyn from January 2020 to October 2022.
+Generate a histogram and a parzen density graph for these accidents
+
+@author: Danny Gardner      drg5567
+"""
+
 conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
 cur = conn.cursor()
 
@@ -47,6 +54,11 @@ def parzen_graph(dataframe):
 
 
 def clean_dataset(dataframe):
+    """
+    Categorize the data into weeks and return the binned data
+    :param dataframe: the given dataframe
+    :return: the new dataframe
+    """
     binned_df = pd.DataFrame(columns=["Week", "NumberOfEvents"])
     for i in range(len(dataframe)):
         dataframe.at[i, "Day"] = i + 1
