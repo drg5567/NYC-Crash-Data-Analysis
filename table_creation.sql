@@ -1,4 +1,8 @@
-# Initial table creation and data cleaning
+/*
+Initial table creation for data storage
+
+Author: Danny Gardner
+ */
 
 CREATE TABLE crash_data
 (
@@ -31,29 +35,3 @@ CREATE TABLE crash_data
     vehicle_type_code_4           varchar(50),
     vehicle_type_code_5           varchar(50)
 );
-
-########## DATA CLEANING ##############
-UPDATE crash_data
-SET vehicle_type_code_1 = 'Delivery Vehicle'
-WHERE LOWER(vehicle_type_code_1) LIKE '%del%'
-   OR LOWER(vehicle_type_code_1) LIKE '%livery%';
-
-UPDATE crash_data
-SET vehicle_type_code_2 = 'Delivery Vehicle'
-WHERE LOWER(vehicle_type_code_2) LIKE '%del%'
-   OR LOWER(vehicle_type_code_2) LIKE '%livery%';
-
-UPDATE crash_data
-SET vehicle_type_code_3 = 'Delivery Vehicle'
-WHERE LOWER(vehicle_type_code_3) LIKE '%del%'
-   OR LOWER(vehicle_type_code_3) LIKE '%livery%';
-
-UPDATE crash_data
-SET vehicle_type_code_4 = 'Delivery Vehicle'
-WHERE LOWER(vehicle_type_code_4) LIKE '%del%'
-   OR LOWER(vehicle_type_code_4) LIKE '%livery%';
-
-UPDATE crash_data
-SET vehicle_type_code_5 = 'Delivery Vehicle'
-WHERE LOWER(vehicle_type_code_5) LIKE '%del%'
-   OR LOWER(vehicle_type_code_5) LIKE '%livery%';
