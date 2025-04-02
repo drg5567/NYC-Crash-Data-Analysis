@@ -14,11 +14,13 @@ def reformat_date(date_str):
     return datetime.datetime.strptime(date_str, '%m/%d/%Y').strftime('%Y-%m-%d')
 
 
-conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
+# Insert connection information in order to run script
+conn = pymysql.connect(host='localhost', user='', password='', db="")
 cur = conn.cursor()
 
 print("Reading Data From CSV")
-crash_data = pd.read_csv("C:\\Users\\Public\\Documents\\nyc_data\\Motor_Vehicle_Collisions_-_Crashes_20240416.csv")
+# Insert path for data file here
+crash_data = pd.read_csv("")
 print("Cleaning Data")
 crash_data = crash_data.replace({np.nan: None})
 

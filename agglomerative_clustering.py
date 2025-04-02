@@ -8,10 +8,13 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 This program performs agglomerative clustering on Brooklyn traffic data for accidents that occurred
 during 2019 and 2023 respectively
 
+Answers question 2 of project questions
+
 @author: Danny Gardner      drg5567
 """
 
-conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
+# Insert connection information in order to run script
+conn = pymysql.connect(host='localhost', user='', password='', db="")
 cur = conn.cursor()
 
 

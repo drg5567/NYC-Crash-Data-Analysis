@@ -6,10 +6,13 @@ import matplotlib.pyplot as plt
 Determine the 60 consecutive days that had the most accidents in Brooklyn from January 2020 to October 2022.
 Generate a histogram and a parzen density graph for these accidents
 
+Answers question 5 of project questions
+
 @author: Danny Gardner      drg5567
 """
 
-conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
+# Insert connection information in order to run script
+conn = pymysql.connect(host='localhost', user='', password='', db="")
 cur = conn.cursor()
 
 

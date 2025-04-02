@@ -11,7 +11,8 @@ Perform principal components analysis on a dataset of Brooklyn traffic incidents
 """
 
 
-conn = pymysql.connect(host='localhost', user='root', password='w00dlandAllianc3', db="brooklyn_crashes")
+# Insert connection information in order to run script
+conn = pymysql.connect(host='localhost', user='', password='', db="")
 cur = conn.cursor()
 
 np.set_printoptions(suppress=True)
